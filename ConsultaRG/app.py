@@ -11,6 +11,12 @@ app.config.from_object(Config)
 # Inicializa la extensión SQLAlchemy con la aplicación Flask
 db.init_app(app)
 
+# Middleware para añadir el encabezado 'ngrok-skip-browser-warning'
+@app.after_request
+def add_header(response):
+    response.headers['ngrok-skip-browser-warning'] = 'true'
+    return response
+
 # Define una ruta para la página principal
 @app.route('/')
 def index():
@@ -46,4 +52,4 @@ def obtener_datos_sql():
 
 # Ejecuta la aplicación Flask en modo depuración si este archivo se ejecuta como el programa principal
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

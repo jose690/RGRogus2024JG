@@ -23,6 +23,14 @@
     </div>
 
     <script>
+
+        // Añade el header 'ngrok-skip-browser-warning' a todas las solicitudes AJAX
+        $.ajaxSetup({
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('ngrok-skip-browser-warning', 'true');
+            }
+        });
+        // Función para buscar el usuario
         $(document).ready(function(){
             $('#cedula').mask('00-0000-0000');
         });
